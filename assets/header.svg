@@ -1,72 +1,445 @@
-<svg width="850" height="240" viewBox="0 0 850 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+﻿<svg width="860" height="260" viewBox="0 0 860 260" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FDFBF9" />
+    <!-- Background Gradient -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFAF7" />
       <stop offset="100%" stop-color="#F2F1ED" />
     </linearGradient>
-    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+
+    <!-- Animated Name Underline Gradient -->
+    <linearGradient id="animatedUnderline" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFCCE1">
+        <animate attributeName="stop-color" values="#FFCCE1; #C6E2E7; #CDE5D9; #F2EBCC; #FFCCE1" dur="6s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="50%" stop-color="#C6E2E7">
+        <animate attributeName="stop-color" values="#C6E2E7; #CDE5D9; #F2EBCC; #FFCCE1; #C6E2E7" dur="6s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#CDE5D9">
+        <animate attributeName="stop-color" values="#CDE5D9; #F2EBCC; #FFCCE1; #C6E2E7; #CDE5D9" dur="6s" repeatCount="indefinite" />
+      </stop>
+    </linearGradient>
+
+    <!-- Soft Pastel Multi-Stop Gradient -->
+    <linearGradient id="pastelBar" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#FFCCE1" />
       <stop offset="25%" stop-color="#F7DDE8" />
       <stop offset="50%" stop-color="#C6E2E7" />
       <stop offset="75%" stop-color="#CDE5D9" />
       <stop offset="100%" stop-color="#F2EBCC" />
     </linearGradient>
-    <filter id="shadow" x="-5" y="-5" width="860" height="250" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#2D3748" flood-opacity="0.04" />
+
+    <!-- Screen Glow Gradient -->
+    <linearGradient id="screenGlow" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#CDE5D9" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#C6E2E7" stop-opacity="0.02" />
+    </linearGradient>
+
+    <!-- Hair Gradient -->
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D2833" />
+      <stop offset="50%" stop-color="#201C24" />
+      <stop offset="100%" stop-color="#18151C" />
+    </linearGradient>
+
+    <!-- Hoodie Soft Rose Gradient -->
+    <linearGradient id="hoodieGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCEEF4" />
+      <stop offset="100%" stop-color="#F2D5E2" />
+    </linearGradient>
+
+    <!-- Skin Tone Gradient -->
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5EE" />
+      <stop offset="100%" stop-color="#FBE6D9" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="cardShadow" x="-4" y="-4" width="868" height="268" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#252B36" flood-opacity="0.05" />
     </filter>
   </defs>
 
-  <!-- Card Background -->
-  <rect x="2" y="2" width="846" height="236" rx="20" fill="url(#bgGrad)" stroke="#FFCCE1" stroke-width="2" filter="url(#shadow)" />
+  <style><![CDATA[
+    /* Typography and Animations */
+    .title-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Outfit', Roboto, sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      fill: #252B36;
+      letter-spacing: -0.5px;
+    }
+    .tagline-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      fill: #475569;
+      letter-spacing: 0.1px;
+    }
+    .badge-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      fill: #252B36;
+    }
 
-  <!-- Soft Decorative Blobs -->
-  <circle cx="780" cy="40" r="90" fill="#FFCCE1" fill-opacity="0.35" />
-  <circle cx="820" cy="120" r="70" fill="#C6E2E7" fill-opacity="0.30" />
-  <circle cx="730" cy="180" r="55" fill="#CDE5D9" fill-opacity="0.30" />
-  <circle cx="40" cy="200" r="60" fill="#F2EBCC" fill-opacity="0.40" />
-  <circle cx="20" cy="30" r="45" fill="#F7DDE8" fill-opacity="0.45" />
+    /* Keyframes for cross-browser fallback and modern SVG renderers */
+    @keyframes nameTyping {
+      0% { clip-path: inset(0 100% 0 0); opacity: 0.8; }
+      100% { clip-path: inset(0 0% 0 0); opacity: 1; }
+    }
+    @keyframes lineExpand {
+      0% { width: 0px; opacity: 0; }
+      50% { opacity: 1; }
+      100% { width: 235px; opacity: 1; }
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(5px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes floatAlt {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(6px); }
+    }
+    @keyframes steamFloat {
+      0% { opacity: 0; transform: translateY(0) scale(0.8); }
+      50% { opacity: 0.6; }
+      100% { opacity: 0; transform: translateY(-8px) scale(1.1); }
+    }
+    @keyframes screenPulse {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 1; }
+    }
 
-  <!-- Top Decorative Accent Bar -->
-  <rect x="20" y="16" width="160" height="4" rx="2" fill="url(#accentGrad)" />
+    .animated-name {
+      animation: nameTyping 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .animated-underline {
+      animation: lineExpand 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+    }
+    .animated-tagline {
+      animation: fadeUp 1.2s ease-out 0.8s both;
+    }
+    .animated-badges {
+      animation: fadeUp 1.2s ease-out 1.2s both;
+    }
+    .floating-element-1 {
+      animation: floatGentle 4.5s ease-in-out infinite;
+    }
+    .floating-element-2 {
+      animation: floatAlt 5s ease-in-out infinite;
+    }
+    .screen-blink {
+      animation: screenPulse 3s ease-in-out infinite;
+    }
+  ]]></style>
 
-  <!-- Status / Pill Badge -->
-  <g transform="translate(40, 36)">
-    <rect width="260" height="26" rx="13" fill="#FFCCE1" fill-opacity="0.6" stroke="#FFCCE1" stroke-width="1" />
-    <circle cx="14" cy="13" r="4" fill="#2E7D32" />
-    <text x="26" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" letter-spacing="0.5">OPEN FOR RESEARCH &amp; ROLES</text>
+  <!-- Card Background with Rounded Corners and Pastel-Pink Border -->
+  <rect x="2" y="2" width="856" height="256" rx="20" fill="url(#cardBg)" stroke="#FFCCE1" stroke-width="2" filter="url(#cardShadow)" />
+
+  <!-- Soft Ambient Pastel Blobs in Background -->
+  <circle cx="80" cy="40" r="50" fill="#F7DDE8" fill-opacity="0.35" />
+  <circle cx="780" cy="50" r="85" fill="#C6E2E7" fill-opacity="0.30" />
+  <circle cx="680" cy="220" r="60" fill="#CDE5D9" fill-opacity="0.25" />
+  <circle cx="430" cy="30" r="35" fill="#F2EBCC" fill-opacity="0.4" />
+
+  <!-- Top Accent Bar -->
+  <rect x="36" y="16" width="120" height="3.5" rx="1.75" fill="url(#pastelBar)" />
+
+  <!-- ==================== LEFT COLUMN: TEXT & IDENTITY ==================== -->
+
+  <!-- Status Badge: Open For Opportunities -->
+  <g transform="translate(36, 32)">
+    <rect width="245" height="25" rx="12.5" fill="#FFCCE1" fill-opacity="0.55" stroke="#FFCCE1" stroke-width="1" />
+    <circle cx="13" cy="12.5" r="4" fill="#10B981">
+      <animate attributeName="fill-opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <text x="25" y="16.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#252B36" letter-spacing="0.5">
+      OPEN FOR RESEARCH &amp; ROLES
+    </text>
   </g>
 
-  <!-- Name -->
-  <text x="40" y="104" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Outfit', Roboto, Helvetica, Arial, sans-serif" font-size="34" font-weight="800" fill="#1E293B" letter-spacing="-0.5">
-    Sharu Nethra R
-  </text>
-
-  <!-- Professional Headline -->
-  <text x="40" y="138" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#475569">
-    AI/ML Engineer  •  Full-Stack Developer  •  Trustworthy AI &amp; FinTech Research
-  </text>
-
-  <!-- Context / Education Pills -->
-  <g transform="translate(40, 168)">
-    <!-- Pill 1: SRMIST -->
-    <rect x="0" y="0" width="225" height="30" rx="8" fill="#C6E2E7" fill-opacity="0.55" stroke="#C6E2E7" stroke-width="1" />
-    <text x="14" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#2D3748">
-      🎓 SRMIST Kattankulathur ('28)
+  <!-- Name: Sharu Nethra R with Letter-by-Letter Reveal -->
+  <g class="animated-name" transform="translate(36, 92)">
+    <text class="title-name" x="0" y="0">
+      Sharu Nethra R
     </text>
+  </g>
 
-    <!-- Pill 2: FinTech Honours -->
-    <rect x="237" y="0" width="205" height="30" rx="8" fill="#CDE5D9" fill-opacity="0.6" stroke="#CDE5D9" stroke-width="1" />
-    <text x="251" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#2D3748">
-      💎 FinTech Honours • CGPA 9.24
-    </text>
+  <!-- Animated Pastel Gradient Underline -->
+  <rect class="animated-underline" x="36" y="102" width="235" height="3.5" rx="1.75" fill="url(#animatedUnderline)">
+    <animate attributeName="width" values="80;235;235" dur="3s" repeatCount="1" />
+  </rect>
 
-    <!-- Pill 3: Key Focus -->
-    <rect x="454" y="0" width="230" height="30" rx="8" fill="#F2EBCC" fill-opacity="0.6" stroke="#F2EBCC" stroke-width="1" />
-    <text x="468" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#2D3748">
-      ⚡ Local RAG &amp; Resilient Systems
+  <!-- Correct Professional Tagline (Strictly without the word Trustworthy) -->
+  <g class="animated-tagline" transform="translate(36, 134)">
+    <text class="tagline-text" x="0" y="0">
+      AI/ML Engineer  •  Full-Stack Developer  •  AI &amp; FinTech Research
     </text>
+    <animate attributeName="opacity" values="0;1" dur="1s" begin="0.5s" fill="freeze" />
+  </g>
+
+  <!-- Rounded Pastel Badges -->
+  <g class="animated-badges" transform="translate(36, 158)">
+    <!-- Badge 1: SRMIST -->
+    <g transform="translate(0, 0)">
+      <rect width="190" height="28" rx="8" fill="#C6E2E7" fill-opacity="0.6" stroke="#C6E2E7" stroke-width="1" />
+      <text class="badge-text" x="12" y="18">
+        🎓 SRMIST Kattankulathur ('28)
+      </text>
+    </g>
+
+    <!-- Badge 2: FinTech Honours -->
+    <g transform="translate(200, 0)">
+      <rect width="186" height="28" rx="8" fill="#CDE5D9" fill-opacity="0.65" stroke="#CDE5D9" stroke-width="1" />
+      <text class="badge-text" x="12" y="18">
+        💎 FinTech Honours · CGPA 9.24
+      </text>
+    </g>
+
+    <!-- Badge 3: Key Focus Area -->
+    <g transform="translate(0, 36)">
+      <rect width="216" height="28" rx="8" fill="#F2EBCC" fill-opacity="0.65" stroke="#F2EBCC" stroke-width="1" />
+      <text class="badge-text" x="12" y="18">
+        ⚡ Local RAG &amp; Resilient Systems
+      </text>
+    </g>
+
+    <!-- Badge 4: Core Tech Highlight -->
+    <g transform="translate(226, 36)">
+      <rect width="160" height="28" rx="8" fill="#F7DDE8" fill-opacity="0.65" stroke="#F7DDE8" stroke-width="1" />
+      <text class="badge-text" x="12" y="18">
+        ✨ Python · TypeScript · ML
+      </text>
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT COLUMN: ANIME DEVELOPER ILLUSTRATION ==================== -->
+  <g id="anime-developer-scene" transform="translate(470, 0)">
+
+    <!-- Ambient Glow behind Desk and Screen -->
+    <ellipse cx="230" cy="180" rx="130" ry="60" fill="url(#screenGlow)" />
+
+    <!-- Modern Desk -->
+    <g id="desk-group">
+      <!-- Desk Surface -->
+      <path d="M70 216 L370 216 Q378 216 378 222 L378 228 Q378 232 370 232 L70 232 Q62 232 62 228 L62 222 Q62 216 70 216 Z" fill="#EADFCB" />
+      <!-- Desk Bevel Shadow -->
+      <rect x="62" y="222" width="316" height="4" fill="#D8CCB5" />
+      <!-- Pastel Desk Mat -->
+      <rect x="110" y="213" width="240" height="5" rx="2.5" fill="#C6E2E7" fill-opacity="0.8" />
+    </g>
+
+    <!-- Cute Succulent Plant on Desk -->
+    <g transform="translate(85, 178)">
+      <!-- Pot (Pale Yellow) -->
+      <path d="M12 28 L28 28 L26 40 L14 40 Z" fill="#F2EBCC" stroke="#DFD7B5" stroke-width="1" />
+      <!-- Plant Leaves (Mint Green) -->
+      <ellipse cx="20" cy="24" rx="5" ry="9" fill="#9DD1B9" transform="rotate(-15 20 24)" />
+      <ellipse cx="20" cy="24" rx="5" ry="9" fill="#B3DFCC" transform="rotate(20 20 24)" />
+      <ellipse cx="20" cy="22" rx="4" ry="7" fill="#CDE5D9" />
+    </g>
+
+    <!-- Pastel Ceramic Coffee Mug with Steam -->
+    <g transform="translate(130, 185)">
+      <!-- Mug Body (Pastel Pink) -->
+      <rect x="0" y="12" width="18" height="20" rx="3" fill="#FFCCE1" stroke="#F3B3CD" stroke-width="1" />
+      <!-- Mug Handle -->
+      <path d="M18 16 C23 16, 23 24, 18 25" stroke="#F3B3CD" stroke-width="2" fill="none" stroke-linecap="round" />
+      <!-- Cute Coffee Heart Motif -->
+      <path d="M6 21 Q9 18 12 21 Q9 25 6 21 Z" fill="#F7DDE8" />
+      <!-- Steam Curls (Animated) -->
+      <path d="M6 8 Q8 4 6 0" stroke="#FFCCE1" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.7">
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -4; 0 -8" dur="2.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7; 0.3; 0" dur="2.5s" repeatCount="indefinite" />
+      </path>
+      <path d="M11 9 Q13 5 11 1" stroke="#C6E2E7" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.6">
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -5; 0 -9" dur="2.8s" begin="0.8s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.6; 0.2; 0" dur="2.8s" begin="0.8s" repeatCount="indefinite" />
+      </path>
+    </g>
+
+    <!-- Anime Developer Character -->
+    <g id="developer-character" transform="translate(195, 42)">
+
+      <!-- Back Hair Layers (Long flowing locks) -->
+      <path d="M48 65 C20 85 10 135 15 165 C22 170 30 160 38 145 C45 130 48 100 52 80 Z" fill="#201C24" />
+      <path d="M92 65 C120 85 130 135 125 165 C118 170 110 160 102 145 C95 130 92 100 88 80 Z" fill="#201C24" />
+
+      <!-- Upper Body / Cozy Pastel Hoodie -->
+      <g id="hoodie">
+        <!-- Torso Base -->
+        <path d="M36 128 C30 138 25 155 22 176 L118 176 C115 155 110 138 104 128 C92 118 48 118 36 128 Z" fill="url(#hoodieGrad)" />
+        <!-- Hoodie Ribbed Collar and Trim -->
+        <path d="M50 120 C56 128 62 133 70 133 C78 133 84 128 90 120 C82 116 58 116 50 120 Z" fill="#FCEEF4" stroke="#E6BFD1" stroke-width="1" />
+        <!-- Inner Shirt Collar (Mint Green) -->
+        <path d="M60 122 L70 130 L80 122 Z" fill="#CDE5D9" />
+        <!-- Hoodie Drawstrings -->
+        <path d="M63 133 L62 148" stroke="#FFCCE1" stroke-width="1.8" stroke-linecap="round" />
+        <circle cx="62" cy="149" r="1.5" fill="#E6BFD1" />
+        <path d="M77 133 L78 148" stroke="#FFCCE1" stroke-width="1.8" stroke-linecap="round" />
+        <circle cx="78" cy="149" r="1.5" fill="#E6BFD1" />
+      </g>
+
+      <!-- Graceful Neck -->
+      <path d="M62 105 L62 122 L78 122 L78 105 Z" fill="url(#skinGrad)" />
+      <!-- Neck Shadow -->
+      <path d="M62 107 C66 114 74 114 78 107 L78 113 C74 118 66 118 62 113 Z" fill="#F2D1C2" opacity="0.6" />
+
+      <!-- Head Base (Delicate anime jawline) -->
+      <path d="M48 64 C48 95 56 112 70 112 C84 112 92 95 92 64 C92 42 84 35 70 35 C56 35 48 42 48 64 Z" fill="url(#skinGrad)" />
+
+      <!-- Soft Rosy Blush -->
+      <ellipse cx="55" cy="85" rx="6" ry="3.5" fill="#FFCCE1" fill-opacity="0.75" />
+      <ellipse cx="85" cy="85" rx="6" ry="3.5" fill="#FFCCE1" fill-opacity="0.75" />
+
+      <!-- Expressive Anime Eyes (Focused, Charming) -->
+      <!-- Left Eye -->
+      <g id="left-eye">
+        <path d="M54 75 Q60 72 65 76" stroke="#252B36" stroke-width="2.2" stroke-linecap="round" fill="none" />
+        <ellipse cx="60" cy="79" rx="3.5" ry="4.5" fill="#3D324A" />
+        <ellipse cx="60.5" cy="79.5" rx="2" ry="2.8" fill="#7C6099" />
+        <!-- Catchlights / Sparkle in eye -->
+        <circle cx="59" cy="77.5" r="1.3" fill="#FFFFFF" />
+        <circle cx="61.5" cy="81" r="0.7" fill="#FFFFFF" />
+        <!-- Soft lower lash -->
+        <path d="M57 84 Q60 85 63 84" stroke="#475569" stroke-width="0.8" fill="none" />
+      </g>
+      <!-- Right Eye -->
+      <g id="right-eye">
+        <path d="M75 76 Q80 72 86 75" stroke="#252B36" stroke-width="2.2" stroke-linecap="round" fill="none" />
+        <ellipse cx="80" cy="79" rx="3.5" ry="4.5" fill="#3D324A" />
+        <ellipse cx="79.5" cy="79.5" rx="2" ry="2.8" fill="#7C6099" />
+        <!-- Catchlights / Sparkle in eye -->
+        <circle cx="79" cy="77.5" r="1.3" fill="#FFFFFF" />
+        <circle cx="81.5" cy="81" r="0.7" fill="#FFFFFF" />
+        <!-- Soft lower lash -->
+        <path d="M77 84 Q80 85 83 84" stroke="#475569" stroke-width="0.8" fill="none" />
+      </g>
+
+      <!-- Dainty Nose and Gentle Smile -->
+      <circle cx="70" cy="89" r="0.8" fill="#E2AC98" />
+      <path d="M66 96 Q70 99 74 96" stroke="#C96E85" stroke-width="1.4" stroke-linecap="round" fill="none" />
+
+      <!-- Modern Over-Ear Headphones (Pastel Mint and Pink) -->
+      <path d="M42 60 C42 30 98 30 98 60" stroke="#CDE5D9" stroke-width="4.5" stroke-linecap="round" fill="none" />
+      <!-- Left Ear Cup -->
+      <rect x="38" y="65" width="7" height="20" rx="3.5" fill="#FFCCE1" stroke="#CDE5D9" stroke-width="1.5" />
+      <!-- Right Ear Cup -->
+      <rect x="95" y="65" width="7" height="20" rx="3.5" fill="#FFCCE1" stroke="#CDE5D9" stroke-width="1.5" />
+
+      <!-- Front Hair: Stylish Anime Bangs and Side Tendrils -->
+      <g id="front-hair">
+        <!-- Main Hair Volume -->
+        <path d="M44 58 C45 36 60 26 70 26 C80 26 95 36 96 58 C96 66 95 76 94 82 C91 74 88 66 84 62 C80 58 75 64 71 58 C67 64 62 58 58 63 C54 67 51 75 46 82 C45 76 44 66 44 58 Z" fill="url(#hairGrad)" />
+        <!-- Side Framing Locks -->
+        <path d="M44 65 C40 85 40 105 45 120 C47 120 48 110 47 98 C46 86 48 76 49 68 Z" fill="#201C24" />
+        <path d="M96 65 C100 85 100 105 95 120 C93 120 92 110 93 98 C94 86 92 76 91 68 Z" fill="#201C24" />
+        <!-- Soft Pastel Hairclip (Mint Star / Barrette) -->
+        <rect x="85" y="44" width="9" height="3" rx="1.5" fill="#CDE5D9" transform="rotate(25 85 44)" />
+        <!-- Delicate Hair Highlights -->
+        <path d="M54 38 Q64 34 76 35 Q86 36 88 42" stroke="#F7DDE8" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.6" />
+      </g>
+
+      <!-- Arms Reaching Toward Laptop Keyboard -->
+      <g id="arms">
+        <!-- Left Arm Sleeve -->
+        <path d="M28 140 C28 152 40 168 56 172 L58 164 C48 160 38 148 36 138 Z" fill="#FCEEF4" />
+        <!-- Right Arm Sleeve -->
+        <path d="M112 140 C112 152 100 168 84 172 L82 164 C92 160 102 148 104 138 Z" fill="#F2D5E2" />
+        <!-- Hands on Keyboard -->
+        <ellipse cx="58" cy="172" rx="6" ry="4" fill="url(#skinGrad)" transform="rotate(-10 58 172)" />
+        <ellipse cx="82" cy="172" rx="6" ry="4" fill="url(#skinGrad)" transform="rotate(10 82 172)" />
+      </g>
+    </g>
+
+    <!-- Sleek Laptop on Desk with Glowing Screen and Coding Interface -->
+    <g id="laptop-group" transform="translate(210, 155)">
+      <!-- Laptop Screen Backing and Frame (Viewed at dynamic angle) -->
+      <path d="M15 15 L95 15 L102 62 L8 62 Z" fill="#1E293B" rx="3" stroke="#C6E2E7" stroke-width="1" />
+      <!-- Glowing Display Surface -->
+      <path class="screen-blink" d="M18 18 L92 18 L98 59 L12 59 Z" fill="#0F172A" />
+
+      <!-- Realistic Code Lines on Display (Syntax Colors: Pink, Mint, Blue, Yellow) -->
+      <!-- Line 1: Header/Prompt -->
+      <rect x="22" y="24" width="22" height="2.5" rx="1" fill="#FFCCE1" />
+      <rect x="47" y="24" width="30" height="2.5" rx="1" fill="#C6E2E7" />
+      <!-- Line 2: Function Definition -->
+      <rect x="22" y="29" width="16" height="2" rx="1" fill="#CDE5D9" />
+      <rect x="41" y="29" width="36" height="2" rx="1" fill="#F2EBCC" />
+      <!-- Line 3: Indented Code -->
+      <rect x="28" y="34" width="42" height="2" rx="1" fill="#C6E2E7" />
+      <!-- Line 4: Return statement -->
+      <rect x="28" y="39" width="24" height="2" rx="1" fill="#FFCCE1" />
+      <rect x="55" y="39" width="20" height="2" rx="1" fill="#CDE5D9" />
+      <!-- Line 5: Output Success -->
+      <rect x="22" y="46" width="55" height="2.2" rx="1" fill="#10B981" />
+      <!-- Blinking Cursor -->
+      <rect x="80" y="46" width="2" height="3" fill="#FFCCE1">
+        <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
+      </rect>
+
+      <!-- Laptop Base / Keyboard Deck -->
+      <path d="M2 62 L108 62 L116 70 L0 70 Z" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="1" />
+      <!-- Keyboard Keys Representation -->
+      <rect x="18" y="63" width="74" height="4" rx="1" fill="#94A3B8" />
+      <!-- Touchpad -->
+      <rect x="44" y="67.5" width="22" height="2" rx="0.8" fill="#CBD5E1" />
+    </g>
+
+    <!-- Floating Technical Symbols and Pastel Sparkles -->
+
+    <!-- Floating Badge 1: < code /> -->
+    <g class="floating-element-1" transform="translate(50, 68)">
+      <rect width="64" height="24" rx="12" fill="#FFCCE1" fill-opacity="0.85" stroke="#F3B3CD" stroke-width="1" />
+      <text x="32" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Courier New', monospace" font-size="11.5" font-weight="700" fill="#252B36" text-anchor="middle">
+        &lt; AI /&gt;
+      </text>
+    </g>
+
+    <!-- Floating Badge 2: { RAG } -->
+    <g class="floating-element-2" transform="translate(310, 75)">
+      <rect width="66" height="24" rx="12" fill="#C6E2E7" fill-opacity="0.85" stroke="#A8D5DC" stroke-width="1" />
+      <text x="33" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Courier New', monospace" font-size="11.5" font-weight="700" fill="#252B36" text-anchor="middle">
+        { RAG }
+      </text>
+    </g>
+
+    <!-- Floating Badge 3: 01 binary -->
+    <g class="floating-element-1" transform="translate(45, 142)">
+      <rect width="44" height="22" rx="11" fill="#CDE5D9" fill-opacity="0.85" stroke="#B4DFC8" stroke-width="1" />
+      <text x="22" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Courier New', monospace" font-size="11" font-weight="700" fill="#252B36" text-anchor="middle">
+        01
+      </text>
+    </g>
+
+    <!-- Floating Sparkle 1 (Mint) -->
+    <g class="floating-element-2" transform="translate(305, 42)">
+      <path d="M6 0 Q7 5 12 6 Q7 7 6 12 Q5 7 0 6 Q5 5 6 0 Z" fill="#9DD1B9">
+        <animateTransform attributeName="transform" type="rotate" values="0 6 6; 360 6 6" dur="12s" repeatCount="indefinite" />
+      </path>
+    </g>
+
+    <!-- Floating Sparkle 2 (Pastel Pink) -->
+    <g class="floating-element-1" transform="translate(130, 48)">
+      <path d="M5 0 Q6 4 10 5 Q6 6 5 10 Q4 6 0 5 Q4 4 5 0 Z" fill="#FFCCE1">
+        <animateTransform attributeName="transform" type="rotate" values="360 5 5; 0 5 5" dur="10s" repeatCount="indefinite" />
+      </path>
+    </g>
+
+    <!-- Floating Star 3 (Pale Yellow) -->
+    <g class="floating-element-2" transform="translate(290, 140)">
+      <path d="M4 0 Q5 3 8 4 Q5 5 4 8 Q3 5 0 4 Q3 3 4 0 Z" fill="#F2EBCC">
+        <animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite" />
+      </path>
+    </g>
+
   </g>
 
   <!-- Bottom Accent Stripe -->
-  <rect x="40" y="218" width="770" height="3" rx="1.5" fill="url(#accentGrad)" />
+  <rect x="36" y="244" width="788" height="3" rx="1.5" fill="url(#pastelBar)" />
+
 </svg>
