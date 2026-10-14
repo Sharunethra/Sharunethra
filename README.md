@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 <img src="assets/header.svg" alt="Sharu Nethra R — GitHub Banner" width="100%" />
 
